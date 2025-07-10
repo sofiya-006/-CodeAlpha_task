@@ -1,0 +1,39 @@
+import random
+
+# Dictionary of responses
+responses = {
+    "greeting": ["Hi!", "Hello!", "Hey there!", "Hi, nice to meet you!"],
+    "how_are_you": ["I'm good, thanks for asking!", "Doing great! How about you?", "I'm fine. Hope you're well too!"],
+    "bye": ["Goodbye!", "See you later!", "Bye! Have a great day!"],
+    "default": ["Sorry, I didn't get that.", "Can you please rephrase?", "I'm not sure I understand."]
+}
+
+# Function to get response based on user input
+def get_response(user_input):
+    user_input = user_input.lower()
+
+    if any(greet in user_input for greet in ["hello", "hi", "hey"]):
+        return random.choice(responses["greeting"])
+    elif "how are you" in user_input:
+        return random.choice(responses["how_are_you"])
+    elif "bye" in user_input:
+        return random.choice(responses["bye"])
+    else:
+        return random.choice(responses["default"])
+
+# Main chatbot function
+def chatbot():
+    print("🤖 SimpleBot: Hello! What's your name?")
+    name = input("You: ").strip()
+    print(f"🤖 SimpleBot: Nice to meet you, {name}! You can start chatting with me now. Type 'bye' to exit.\n")
+
+    while True:
+        user_input = input(f"{name}: ").strip()
+        response = get_response(user_input)
+        print("🤖 SimpleBot:", response)
+
+        if "bye" in user_input.lower():
+            break
+
+# Run the chatbot
+chatbot()
